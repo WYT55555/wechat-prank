@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!-- 微信适配必备 -->
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <title>微信安全中心</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            /* 整蛊抖动动画 */
+            animation: shake 0.1s infinite alternate;
+        }
+        /* 震动动画核心 */
+        @keyframes shake {
+            0% { transform: translate(0,0); }
+            100% { transform: translate(-2px, 2px); }
+        }
+        .container {
+            max-width: 450px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .wechat-logo {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .wechat-logo img {
+            width: 60px;
+        }
+        .title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #07c160;
+            margin-bottom: 30px;
+        }
+        .content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .warn {
+            color: #fa5151;
+            font-weight: bold;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: #07c160;
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 16px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="wechat-logo">
+            <!-- 微信绿色图标 -->
+            <svg t="1712254020453" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2312" width="128" height="128" fill="#07c160"><path d="M725.333333 256C573.866667 256 452.266667 348.16 452.266667 460.8c0 112.64 121.6 204.8 273.066666 204.8 34.133333 0 66.133333-4.266667 94.933334-12.8l132.266666 40.533333-29.866666-119.466666c21.333333-27.733333 32-61.866667 32-98.133334 0-112.64-121.6-204.8-273.066667-204.8zM298.666667 512c-27.733333 0-53.333333-10.666667-74.666667-29.866667-21.333333-19.2-32-43.733333-32-70.4 0-26.666667 10.666667-51.2 32-70.4 21.333333-19.2 46.933333-29.866667 74.666667-29.866667 27.733333 0 53.333333 10.666667 74.666667 29.866667 21.333333 19.2 32 43.733333 32 70.4 0 26.666667-10.666667 51.2-32 70.4-21.333333 19.2-46.933333 29.866667-74.666667 29.866667z m192 0c-27.733333 0-53.333333-10.666667-74.666667-29.866667-21.333333-19.2-32-43.733333-32-70.4 0-26.666667 10.666667-51.2 32-70.4 21.333333-19.2 46.933333-29.866667 74.666667-29.866667 27.733333 0 53.333333 10.666667 74.666667 29.866667 21.333333 19.2 32 43.733333 32 70.4 0 26.666667-10.666667 51.2-32 70.4-21.333333 19.2-46.933333 29.866667-74.666667 29.866667z m192 0c-27.733333 0-53.333333-10.666667-74.666667-29.866667-21.333333-19.2-32-43.733333-32-70.4 0-26.666667 10.666667-51.2 32-70.4 21.333333-19.2 46.933333-29.866667 74.666667-29.866667 27.733333 0 53.333333 10.666667 74.666667 29.866667 21.333333 19.2 32 43.733333 32 70.4 0 26.666667-10.666667 51.2-32 70.4-21.333333 19.2-46.933333 29.866667-74.666667 29.866667z" p-id="2313"></path></svg>
+        </div>
+        <div class="title">微信官方安全通知</div>
+        <div class="content">
+            检测到你的账号存在<br>
+            <span class="warn">异常登录风险</span>，请立即点击下方按钮进行安全验证。<br><br>
+            未验证账号将在10分钟内<strong>强制封号处理</strong>！
+        </div>
+        <button class="btn" onclick="startPrank()">立即安全验证</button>
+    </div>
+
+    <script>
+        // 微信震动 + 无限弹窗 恶作剧
+        function startPrank() {
+            // 触发手机震动（微信/手机浏览器都支持）
+            if (navigator.vibrate) {
+                navigator.vibrate([100, 50, 100, 50, 200]);
+            }
+            
+            // 无法关闭的循环弹窗
+            function prankAlert() {
+                alert("⚠️ 验证失败！\n你的微信已被临时封禁\n\n【愚人节快乐！】");
+                // 死循环弹窗
+                setTimeout(prankAlert, 100);
+            }
+            
+            // 禁止关闭页面
+            window.onbeforeunload = function() {
+                return "请勿关闭，账号正在保护中！";
+            };
+            
+            prankAlert();
+        }
+    </script>
+</body>
+</html>
