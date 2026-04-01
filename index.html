@@ -1,187 +1,82 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>愚人节惊喜</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-user-select: none;
-            user-select: none;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 30%, #ffb6c1 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
-        }
-        
-        .container {
-            background: rgba(255, 255, 255, 0.98);
-            border-radius: 20px;
-            padding: 30px 25px;
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-        }
-        
-        .title {
-            font-size: 24px;
-            color: #ff4081;
-            margin-bottom: 15px;
-        }
-        
-        .subtitle {
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 25px;
-            line-height: 1.5;
-        }
-        
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        
-        .btn {
-            padding: 18px;
-            border-radius: 12px;
-            font-size: 17px;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .btn-wrong {
-            background: #f8f9fa;
-            color: #666;
-            border: 2px solid #e9ecef;
-        }
-        
-        .btn-correct {
-            background: linear-gradient(135deg, #ff4081, #ff6b9d);
-            color: white;
-        }
-        
-        .error {
-            background: rgba(244, 67, 54, 0.9);
-            color: white;
-            padding: 12px;
-            border-radius: 10px;
-            margin-top: 15px;
-            display: none;
-        }
-        
-        .success {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #ff6b9d, #ff8fab, #ffb6c1);
-            display: none;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .success-box {
-            background: white;
-            border-radius: 20px;
-            padding: 40px 30px;
-            text-align: center;
-            width: 90%;
-            max-width: 400px;
-        }
-        
-        .close-btn {
-            background: linear-gradient(135deg, #4CAF50, #66BB6A);
-            color: white;
-            padding: 16px 40px;
-            border: none;
-            border-radius: 25px;
-            margin-top: 20px;
-            cursor: pointer;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>愚人节惊喜</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
+body{background:#ff9bbb;display:flex;align-items:center;justify-content:center;height:100vh;}
+.main{background:#fff;padding:30px;border-radius:20px;text-align:center;width:85%;max-width:380px;}
+.title{font-size:24px;color:#ff4080;margin-bottom:15px;}
+.desc{color:#666;margin-bottom:25px;line-height:1.5;}
+.btn{width:100%;padding:16px;border-radius:12px;border:0;margin-bottom:10px;font-size:16px;cursor:pointer;}
+.wrong{background:#f2f2f2;color:#666;}
+.right{background:#ff4080;color:white;}
+.msg{background:#ff4444;color:white;padding:10px;border-radius:8px;margin-top:15px;display:none;}
+.success{position:fixed;top:0;left:0;width:100%;height:100%;background:#ff9bbb;display:none;align-items:center;justify-content:center;}
+.suc-box{background:#fff;padding:40px;border-radius:20px;text-align:center;}
+</style>
 </head>
-
 <body>
-    <!-- 主界面 -->
-    <div class="container" id="main">
-        <div class="title">🎭 愚人节特别挑战 🎭</div>
-        <div class="subtitle">
-            亲爱的，你点开了这个链接！<br>
-            现在你必须完成挑战才能退出...
-        </div>
-        <div class="options">
-            <button class="btn btn-wrong" id="wrong1">❌ 点这里退出</button>
-            <button class="btn btn-wrong" id="wrong2">❌ 拒绝挑战</button>
-            <button class="btn btn-wrong" id="wrong3">❌ 我不是你宝贝</button>
-            <button class="btn btn-correct" id="correct">💋 亲男朋友一口</button>
-        </div>
-        <div class="error" id="error"></div>
-    </div>
 
-    <!-- 成功界面 -->
-    <div class="success" id="success">
-        <div class="success-box">
-            <h2>🎉 挑战成功！ 🎉</h2>
-            <p>你选择了"亲男朋友一口"！<br>已自动发送我爱你</p>
-            <div style="font-size:24px; color:#ff4081; margin:20px 0;">我爱你 💕</div>
-            <button class="close-btn" id="closeBtn">退出页面</button>
-        </div>
-    </div>
+<div class="main" id="main">
+  <div class="title">🎭 愚人节挑战 🎭</div>
+  <div class="desc">你必须完成挑战才能返回~</div>
+  <button class="btn wrong" id="b1">❌ 点我退出</button>
+  <button class="btn wrong" id="b2">❌ 拒绝挑战</button>
+  <button class="btn wrong" id="b3">❌ 我才不亲</button>
+  <button class="btn right" id="ok">💋 亲男朋友一口</button>
+  <div class="msg" id="msg"></div>
+</div>
+
+<div class="success" id="success">
+  <div class="suc-box">
+    <h2 style="color:#ff4080">🎉 挑战成功 🎉</h2>
+    <p style="margin:15px 0">已自动发送：我爱你 💕</p>
+    <button onclick="exitPage()" style="background:#4caf50;color:white;padding:12px 30px;border:0;border-radius:30px;">退出页面</button>
+  </div>
+</div>
 
 <script>
 // ==============================================
-// 【正宗】全网通用 · 微信返回劫持（鬼打墙）
-// 严格按照你说的原理实现：pushState + popstate
+// 核心：只劫持【返回箭头】，苹果/安卓都生效
 // ==============================================
-let canExit = false;
+let canBack = false;
 
-// 1. 页面加载 → 立刻塞一条历史记录
+// 1. 先塞一条历史
 history.pushState(null, null, location.href);
 
-// 2. 监听返回键 → 再次塞记录 → 无限循环（鬼打墙）
-window.addEventListener('popstate', function () {
-    if (!canExit) {
-        history.pushState(null, null, location.href);
-        showError("哈哈哈，你退不出去的！");
-    }
+// 2. 监听返回，无限塞历史（鬼打墙）
+window.addEventListener("popstate", function () {
+  if (!canBack) {
+    history.pushState(null, null, location.href);
+    showMsg("哈哈哈，返回键已经被我锁住啦！");
+  }
 });
 
-// ==================== 按钮逻辑 ====================
-document.getElementById('wrong1').onclick = () => showError("想得美！不亲我出不去~");
-document.getElementById('wrong2').onclick = () => showError("拒绝无效！必须亲我~");
-document.getElementById('wrong3').onclick = () => showError("你就是我宝贝，跑不掉~");
+// 错误按钮
+document.getElementById("b1").onclick = () => showMsg("别想跑！");
+document.getElementById("b2").onclick = () => showMsg("拒绝无效！");
+document.getElementById("b3").onclick = () => showMsg("你就是我的宝贝~");
 
-// 选对 → 解除劫持，可以退出
-document.getElementById('correct').onclick = function () {
-    canExit = true;
-    document.getElementById('main').style.display = 'none';
-    document.getElementById('success').style.display = 'flex';
+// 正确按钮：解除返回劫持
+document.getElementById("ok").onclick = () => {
+  canBack = true;
+  document.getElementById("main").style.display = "none";
+  document.getElementById("success").style.display = "flex";
 };
 
-// 退出按钮
-document.getElementById('closeBtn').onclick = function () {
-    if (window.WeixinJSBridge) WeixinJSBridge.invoke('closeWindow');
-    else window.close();
-};
+function showMsg(text) {
+  const m = document.getElementById("msg");
+  m.textContent = text;
+  m.style.display = "block";
+  setTimeout(() => m.style.display = "none", 1800);
+}
 
-// 错误提示
-function showError(msg) {
-    let err = document.getElementById('error');
-    err.textContent = msg;
-    err.style.display = 'block';
-    setTimeout(() => err.style.display = 'none', 2000);
+function exitPage() {
+  if (window.WeixinJSBridge) WeixinJSBridge.invoke("closeWindow");
+  else window.close();
 }
 </script>
 </body>
