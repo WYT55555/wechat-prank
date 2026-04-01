@@ -1,155 +1,494 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>愚人节愿望</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif}
-body{
-  background: linear-gradient(135deg, #ffe6f0, #ffd1e0);
-  min-height:100vh;
-  padding:30px 20px;
-  text-align:center;
-  overflow-x: hidden;
-}
-.title{
-  font-size:28px;
-  color:#c8507c;
-  margin-bottom:30px;
-  position: relative;
-  z-index:10;
-  font-weight: bold;
-}
-.wrap{
-  position: relative;
-  width:100%;
-  height: 80vh;
-  max-width: 500px;
-  margin: 0 auto;
-}
-
-/* 浪漫气泡 + 持续浮动 */
-.item{
-  position: absolute;
-  background:rgba(255,255,255,0.9);
-  padding: 24px 20px;
-  border-radius:50%;
-  box-shadow: 0 8px 24px rgba(255,66,156,0.15);
-  font-size:16px;
-  cursor:pointer;
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-  white-space: nowrap;
-  animation: float 4s ease-in-out infinite alternate;
-  z-index:2;
-  border: 1px solid rgba(255,183,211,0.4);
-}
-@keyframes float {
-  from { transform: translateY(0px); }
-  to   { transform: translateY(-18px); }
-}
-
-.special{
-  background: linear-gradient(135deg, #ff7eb9, #ff5c96);
-  color:#fff;
-  font-weight:bold;
-  border: 2px solid #ffb6c1;
-  z-index:1;
-}
-
-.tip{
-  margin-top:20px;
-  color:#b86b8d;
-  font-size:15px;
-  position: relative;
-  z-index:10;
-}
-.mask{
-  position:fixed;
-  top:0;left:0;
-  width:100%;height:100%;
-  background:rgba(255,156,192,0.3);
-  display:none;
-  z-index:999;
-}
-.pop{
-  position:fixed;
-  top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  background:#fff;
-  padding:36px;
-  border-radius:20px;
-  display:none;
-  min-width:280px;
-  z-index:1000;
-  box-shadow: 0 12px 36px rgba(0,0,0,0.2);
-}
-.pop h3{
-  color:#ff5c96;
-  margin-bottom:15px;
-  font-size:22px;
-}
-.pop p{
-  color:#666;
-  line-height:1.6;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>愚人节惊喜</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 30%, #ffb6c1 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+        }
+        
+        /* 主容器 */
+        .container {
+            background-color: rgba(255, 255, 255, 0.98);
+            border-radius: 20px;
+            padding: 30px 25px;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            animation: popIn 0.6s ease-out;
+        }
+        
+        @keyframes popIn {
+            0% { transform: scale(0.8) translateY(20px); opacity: 0; }
+            100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+        
+        /* 标题 */
+        .title {
+            font-size: 24px;
+            color: #ff4081;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .title-icon {
+            font-size: 28px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        /* 副标题 */
+        .subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+        
+        /* 选项容器 */
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        /* 选项按钮 */
+        .option-button {
+            padding: 18px 20px;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .option-button:active {
+            transform: scale(0.97);
+        }
+        
+        .option-wrong {
+            background-color: #f8f9fa;
+            color: #666;
+            border: 2px solid #e9ecef;
+        }
+        
+        .option-wrong:hover {
+            background-color: #e9ecef;
+        }
+        
+        .option-correct {
+            background: linear-gradient(135deg, #ff4081, #ff6b9d);
+            color: white;
+            border: 2px solid #ff4081;
+        }
+        
+        .option-correct:hover {
+            background: linear-gradient(135deg, #f50057, #ff4081);
+        }
+        
+        .option-icon {
+            font-size: 20px;
+        }
+        
+        /* 错误提示 */
+        .error-message {
+            background-color: rgba(244, 67, 54, 0.9);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 15px;
+            margin-top: 15px;
+            display: none;
+            animation: shake 0.5s ease;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        /* 成功界面 */
+        .success-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 30%, #ffb6c1 100%);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 2000;
+            padding: 20px;
+        }
+        
+        .success-content {
+            background-color: rgba(255, 255, 255, 0.98);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            animation: successPop 0.8s ease-out;
+        }
+        
+        @keyframes successPop {
+            0% { transform: scale(0.5) rotate(-5deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        
+        .success-title {
+            font-size: 28px;
+            color: #ff4081;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .success-message {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        .love-message-container {
+            background: linear-gradient(135deg, #ff4081, #ff6b9d);
+            color: white;
+            padding: 25px 20px;
+            border-radius: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 25px 0;
+            animation: pulse 2s infinite;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 5px 20px rgba(255, 64, 129, 0.3); }
+            50% { transform: scale(1.03); box-shadow: 0 8px 25px rgba(255, 64, 129, 0.5); }
+            100% { transform: scale(1); box-shadow: 0 5px 20px rgba(255, 64, 129, 0.3); }
+        }
+        
+        .close-button {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 25px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+            max-width: 200px;
+        }
+        
+        .close-button:active {
+            transform: scale(0.95);
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px 20px;
+            }
+            
+            .title {
+                font-size: 22px;
+            }
+            
+            .option-button {
+                padding: 16px 20px;
+                font-size: 16px;
+            }
+            
+            .success-content {
+                padding: 30px 20px;
+            }
+            
+            .success-title {
+                font-size: 24px;
+            }
+            
+            .love-message-container {
+                font-size: 22px;
+                padding: 20px 15px;
+            }
+        }
+    </style>
 </head>
 <body>
-
-<div class="title">愚人节·愿望成真</div>
-<div class="wrap">
-  <div class="item normal" style="top:10px; left:10px">暴富一百万</div>
-  <div class="item normal" style="top:90px; left:190px">吃不胖还变瘦</div>
-  <div class="item normal" style="top:20px; left:320px">每天睡到自然醒</div>
-  <div class="item normal" style="top:200px; left:30px">永远开心不生气</div>
-  <div class="item normal" style="top:260px; left:240px">想要最新的手机</div>
-  <div class="item special" style="top:140px; left:110px">亲男朋友一下</div>
-</div>
-<div class="tip">点击任意愿望，试试能不能实现～</div>
-
-<div class="mask" id="mask"></div>
-<div class="pop" id="pop">
-  <h3>🎉 愿望实现啦</h3>
-  <p>已复制：我爱你</p>
-  <p>快去聊天框粘贴吧～</p>
-</div>
-
-<script>
-let scaleNormal = 1;
-let scaleSpecial = 1;
-
-document.querySelectorAll('.normal').forEach(i=>{
-  i.onclick=()=>{
-    alert("你选择了："+i.innerText+"\n好像有点难实现哦…");
-
-    // 每次缩小幅度更大，并且可以一直变小
-    scaleNormal = Math.max(0.01, scaleNormal * 0.6);
-    document.querySelectorAll('.normal').forEach(n=>{
-      n.style.transform = `scale(${scaleNormal})`;
-      n.style.opacity = scaleNormal + 0.2;
-    });
-
-    // 特殊愿望大幅变大，越来越夸张，直到撑满全屏
-    scaleSpecial *= 1.8;
-    let sp = document.querySelector('.special');
-    sp.style.transform = `scale(${scaleSpecial})`;
-    sp.style.zIndex = 99;
-  }
-})
-
-document.querySelector('.special').onclick=()=>{
-  alert("你选择了：亲男朋友一下\n恭喜！这个愿望可以实现～");
-  document.getElementById('mask').style.display='block';
-  document.getElementById('pop').style.display='block';
-
-  let t=document.createElement('textarea');
-  t.value='我爱你';
-  document.body.appendChild(t);
-  t.select();
-  document.execCommand('copy');
-  document.body.removeChild(t);
-}
-</script>
+    <!-- 主容器 -->
+    <div class="container" id="main-container">
+        <div class="title">
+            <span class="title-icon">🎭</span>
+            <span>愚人节特别挑战</span>
+            <span class="title-icon">🎭</span>
+        </div>
+        
+        <div class="subtitle">
+            亲爱的，你点开了这个链接！<br>
+            现在你必须完成挑战才能退出...
+        </div>
+        
+        <div class="options-container">
+            <button class="option-button option-wrong" id="wrong1">
+                <span class="option-icon">❌</span>
+                <span>点这里退出</span>
+            </button>
+            
+            <button class="option-button option-wrong" id="wrong2">
+                <span class="option-icon">❌</span>
+                <span>拒绝挑战</span>
+            </button>
+            
+            <button class="option-button option-wrong" id="wrong3">
+                <span class="option-icon">❌</span>
+                <span>我不是你宝贝</span>
+            </button>
+            
+            <button class="option-button option-correct" id="correct">
+                <span class="option-icon">💋</span>
+                <span>亲男朋友一口</span>
+            </button>
+        </div>
+        
+        <div class="error-message" id="error-message">
+            错误选择！请选择"亲男朋友一口"才能退出！
+        </div>
+    </div>
+    
+    <!-- 成功界面 -->
+    <div class="success-container" id="success-container">
+        <div class="success-content">
+            <div class="success-title">
+                <span>🎉</span>
+                <span>挑战成功！</span>
+                <span>🎉</span>
+            </div>
+            
+            <div class="success-message">
+                你选择了"亲男朋友一口"！<br>
+                已经自动发送"我爱你"消息
+            </div>
+            
+            <div class="love-message-container" id="love-message">
+                我爱你 💕
+            </div>
+            
+            <button class="close-button" id="close-button">
+                退出页面
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("页面加载完成，开始初始化...");
+            
+            // 添加事件监听 - 使用更可靠的事件监听方式
+            document.getElementById('wrong1').addEventListener('click', function() {
+                console.log("点击了错误选项1");
+                handleWrongOption(1);
+            });
+            
+            document.getElementById('wrong2').addEventListener('click', function() {
+                console.log("点击了错误选项2");
+                handleWrongOption(2);
+            });
+            
+            document.getElementById('wrong3').addEventListener('click', function() {
+                console.log("点击了错误选项3");
+                handleWrongOption(3);
+            });
+            
+            document.getElementById('correct').addEventListener('click', function() {
+                console.log("点击了正确选项");
+                handleCorrectOption();
+            });
+            
+            document.getElementById('close-button').addEventListener('click', function() {
+                console.log("点击了关闭按钮");
+                closeSuccess();
+            });
+            
+            // 测试点击事件是否绑定成功
+            console.log("事件监听绑定完成");
+            
+            // 显示页面已准备就绪
+            console.log("页面已准备就绪，可以交互");
+        });
+        
+        // 处理错误选项
+        function handleWrongOption(optionNum) {
+            console.log("处理错误选项:", optionNum);
+            
+            const errorMessages = [
+                "想得美！不亲我是出不去的~",
+                "拒绝无效！今天必须亲我~",
+                "不承认也没用，你就是我宝贝！"
+            ];
+            
+            const errorMessage = errorMessages[optionNum - 1] || "错误选择！请选择正确的选项才能退出！";
+            showError(errorMessage);
+            
+            // 添加震动效果
+            const container = document.getElementById('main-container');
+            container.style.animation = 'none';
+            setTimeout(() => {
+                container.style.animation = 'popIn 0.6s ease-out';
+            }, 10);
+        }
+        
+        // 处理正确选项
+        function handleCorrectOption() {
+            console.log("处理正确选项");
+            
+            // 隐藏主容器
+            document.getElementById('main-container').style.display = 'none';
+            
+            // 显示成功界面
+            document.getElementById('success-container').style.display = 'flex';
+            
+            // 显示发送"我爱你"消息
+            showLoveMessage();
+            
+            console.log("正确选项处理完成");
+        }
+        
+        // 显示错误消息
+        function showError(message) {
+            console.log("显示错误消息:", message);
+            
+            const errorElement = document.getElementById('error-message');
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+            
+            // 2秒后隐藏错误消息
+            setTimeout(() => {
+                errorElement.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 显示"我爱你"消息
+        function showLoveMessage() {
+            console.log("显示我爱你消息");
+            
+            const loveMessage = document.getElementById('love-message');
+            
+            // 显示发送中的动画
+            let count = 0;
+            const sendAnimation = setInterval(() => {
+                const dots = '.'.repeat((count % 4));
+                loveMessage.textContent = `正在发送我爱你消息${dots}`;
+                count++;
+                
+                if (count === 8) {
+                    clearInterval(sendAnimation);
+                    loveMessage.innerHTML = "我爱你 💕<br><small>消息已发送成功！</small>";
+                }
+            }, 300);
+            
+            // 模拟消息已发送
+            setTimeout(() => {
+                console.log("模拟发送消息完成");
+            }, 3000);
+        }
+        
+        // 关闭成功界面
+        function closeSuccess() {
+            console.log("关闭成功界面");
+            
+            // 尝试关闭页面
+            try {
+                // 在微信中，可以尝试关闭
+                if (window.WeixinJSBridge) {
+                    WeixinJSBridge.invoke('closeWindow', {}, function(res) {
+                        console.log("微信关闭窗口结果:", res);
+                    });
+                } else {
+                    // 非微信环境，显示提示
+                    alert("愚人节快乐！现在可以正常关闭页面了~");
+                    
+                    // 尝试普通关闭
+                    window.close();
+                    
+                    // 如果无法关闭，显示提示
+                    setTimeout(() => {
+                        document.getElementById('success-container').innerHTML = 
+                            '<div class="success-content">' +
+                            '<div class="success-title">🎉 愚人节快乐！ 🎉</div>' +
+                            '<div class="success-message">挑战完成！现在可以正常关闭页面了~</div>' +
+                            '<button class="close-button" onclick="window.location.reload()">重新开始</button>' +
+                            '</div>';
+                    }, 100);
+                }
+            } catch (e) {
+                console.error("关闭页面失败:", e);
+                alert("页面可以正常关闭了！愚人节快乐！");
+            }
+        }
+        
+        // 防止页面滚动
+        document.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+        
+        // 防止右键菜单
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+        
+        // 防止选择文本
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+        });
+    </script>
 </body>
 </html>
