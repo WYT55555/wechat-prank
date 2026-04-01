@@ -1,39 +1,43 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>愚人节快乐</title>
-    <style>
-        *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-        body{background:#ff6a6a;color:white;text-align:center;padding-top:40vh;font-size:20px}
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>愚人节快乐</title>
+<style>
+  body{
+    background:#ff4444;
+    color:white;
+    text-align:center;
+    padding-top:40vh;
+    font-size:22px;
+    user-select:none;
+  }
+</style>
 </head>
 <body>
-    <h1>愚人节快乐～</h1>
-    <p>你关不掉我哦 😈</p>
+
+愚人节快乐～
+<br>
+你退不出去的哦 😈
 
 <script>
-// 禁止返回
-history.pushState(null, null, location.href);
-window.onpopstate = function () {
-    history.go(1);
+// 1. 拦截安卓物理返回键 & 浏览器返回
+history.pushState(null, document.title, location.href);
+window.addEventListener('popstate', function () {
+  history.pushState(null, document.title, location.href);
+});
+
+// 2. 拦截关闭/刷新提示
+window.onbeforeunload = function() {
+  return "确定要离开吗？";
 };
 
-// 无限新开页面
-function boom() {
-    window.open(location.href, '_blank');
-    setTimeout(boom, 10);
-}
+// 3. 疯狂自动刷新/原地停留（恶心人效果）
+setInterval(function(){
+  window.scrollTo(0,0);
+}, 100);
 
-// 关闭时触发
-window.onbeforeunload = function () {
-    boom();
-    return "别想关掉我～";
-};
-
-// 一打开就开始弹
-boom();
 </script>
 </body>
 </html>
