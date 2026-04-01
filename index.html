@@ -226,6 +226,7 @@
             transition: all 0.2s ease;
             width: 100%;
             max-width: 200px;
+            display: none;
         }
         
         .close-button:active {
@@ -332,43 +333,33 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log("页面加载完成，开始初始化...");
             
-            // 添加事件监听 - 使用更可靠的事件监听方式
+            // 添加事件监听
             document.getElementById('wrong1').addEventListener('click', function() {
-                console.log("点击了错误选项1");
                 handleWrongOption(1);
             });
             
             document.getElementById('wrong2').addEventListener('click', function() {
-                console.log("点击了错误选项2");
                 handleWrongOption(2);
             });
             
             document.getElementById('wrong3').addEventListener('click', function() {
-                console.log("点击了错误选项3");
                 handleWrongOption(3);
             });
             
             document.getElementById('correct').addEventListener('click', function() {
-                console.log("点击了正确选项");
                 handleCorrectOption();
             });
             
-            document.getElementById('close-button').addEventListener('click', function() {
-                console.log("点击了关闭按钮");
-                closeSuccess();
+            // 彻底禁用关闭按钮功能
+            document.getElementById('close-button').addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                alert("愚人节快乐！页面无法关闭哦～");
             });
-            
-            // 测试点击事件是否绑定成功
-            console.log("事件监听绑定完成");
-            
-            // 显示页面已准备就绪
-            console.log("页面已准备就绪，可以交互");
         });
         
         // 处理错误选项
         function handleWrongOption(optionNum) {
-            console.log("处理错误选项:", optionNum);
-            
             const errorMessages = [
                 "想得美！不亲我是出不去的~",
                 "拒绝无效！今天必须亲我~",
@@ -378,7 +369,7 @@
             const errorMessage = errorMessages[optionNum - 1] || "错误选择！请选择正确的选项才能退出！";
             showError(errorMessage);
             
-            // 添加震动效果
+            // 震动效果
             const container = document.getElementById('main-container');
             container.style.animation = 'none';
             setTimeout(() => {
@@ -388,8 +379,6 @@
         
         // 处理正确选项
         function handleCorrectOption() {
-            console.log("处理正确选项");
-            
             // 隐藏主容器
             document.getElementById('main-container').style.display = 'none';
             
@@ -398,14 +387,10 @@
             
             // 显示发送"我爱你"消息
             showLoveMessage();
-            
-            console.log("正确选项处理完成");
         }
         
         // 显示错误消息
         function showError(message) {
-            console.log("显示错误消息:", message);
-            
             const errorElement = document.getElementById('error-message');
             errorElement.textContent = message;
             errorElement.style.display = 'block';
@@ -418,11 +403,9 @@
         
         // 显示"我爱你"消息
         function showLoveMessage() {
-            console.log("显示我爱你消息");
-            
             const loveMessage = document.getElementById('love-message');
             
-            // 显示发送中的动画
+            // 发送动画
             let count = 0;
             const sendAnimation = setInterval(() => {
                 const dots = '.'.repeat((count % 4));
@@ -434,60 +417,47 @@
                     loveMessage.innerHTML = "我爱你 💕<br><small>消息已发送成功！</small>";
                 }
             }, 300);
-            
-            // 模拟消息已发送
-            setTimeout(() => {
-                console.log("模拟发送消息完成");
-            }, 3000);
         }
         
-        // 关闭成功界面
-        function closeSuccess() {
-            console.log("关闭成功界面");
-            
-            // 尝试关闭页面
-            try {
-                // 在微信中，可以尝试关闭
-                if (window.WeixinJSBridge) {
-                    WeixinJSBridge.invoke('closeWindow', {}, function(res) {
-                        console.log("微信关闭窗口结果:", res);
-                    });
-                } else {
-                    // 非微信环境，显示提示
-                    alert("愚人节快乐！现在可以正常关闭页面了~");
-                    
-                    // 尝试普通关闭
-                    window.close();
-                    
-                    // 如果无法关闭，显示提示
-                    setTimeout(() => {
-                        document.getElementById('success-container').innerHTML = 
-                            '<div class="success-content">' +
-                            '<div class="success-title">🎉 愚人节快乐！ 🎉</div>' +
-                            '<div class="success-message">挑战完成！现在可以正常关闭页面了~</div>' +
-                            '<button class="close-button" onclick="window.location.reload()">重新开始</button>' +
-                            '</div>';
-                    }, 100);
-                }
-            } catch (e) {
-                console.error("关闭页面失败:", e);
-                alert("页面可以正常关闭了！愚人节快乐！");
-            }
-        }
-        
-        // 防止页面滚动
+        // ==================== 核心强制锁定代码 ====================
+        // 1. 彻底禁用所有退出/关闭/刷新行为
+        window.onbeforeunload = function(e) {
+            e.preventDefault();
+            return "愚人节快乐！页面无法关闭、刷新或返回～";
+        };
+
+        // 2. 禁用返回键
+        history.pushState(null, null, location.href);
+        window.onpopstate = function () {
+            history.go(1);
+            alert("愚人节快乐！禁止返回上一页～");
+        };
+
+        // 3. 禁用所有系统菜单、刷新、选择
         document.addEventListener('touchmove', function(e) {
             e.preventDefault();
         }, { passive: false });
         
-        // 防止右键菜单
         document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
+            alert("愚人节快乐！禁止右键操作～");
         });
         
-        // 防止选择文本
         document.addEventListener('selectstart', function(e) {
             e.preventDefault();
+        });
+
+        // 4. 禁用键盘刷新/关闭快捷键
+        document.addEventListener('keydown', function(e) {
+            if (
+                e.key === 'F5' || 
+                e.key === 'F11' || 
+                (e.ctrlKey && e.key === 'r') || 
+                (e.metaKey && e.key === 'r')
+            ) {
+                e.preventDefault();
+                alert("愚人节快乐！禁止刷新页面～");
+            }
         });
     </script>
 </body>
