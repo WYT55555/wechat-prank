@@ -28,7 +28,6 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
         }
         
-        /* 主容器 */
         .container {
             background-color: rgba(255, 255, 255, 0.98);
             border-radius: 20px;
@@ -47,7 +46,6 @@
             100% { transform: scale(1) translateY(0); opacity: 1; }
         }
         
-        /* 标题 */
         .title {
             font-size: 24px;
             color: #ff4081;
@@ -68,7 +66,6 @@
             50% { transform: translateY(-5px); }
         }
         
-        /* 副标题 */
         .subtitle {
             font-size: 16px;
             color: #666;
@@ -76,7 +73,6 @@
             line-height: 1.5;
         }
         
-        /* 选项容器 */
         .options-container {
             display: flex;
             flex-direction: column;
@@ -84,7 +80,6 @@
             margin-bottom: 20px;
         }
         
-        /* 选项按钮 */
         .option-button {
             padding: 18px 20px;
             border-radius: 12px;
@@ -129,7 +124,6 @@
             font-size: 20px;
         }
         
-        /* 错误提示 */
         .error-message {
             background-color: rgba(244, 67, 54, 0.9);
             color: white;
@@ -147,7 +141,6 @@
             75% { transform: translateX(5px); }
         }
         
-        /* 成功界面 */
         .success-container {
             position: fixed;
             top: 0;
@@ -226,36 +219,29 @@
             transition: all 0.2s ease;
             width: 100%;
             max-width: 200px;
-            display: none;
         }
         
         .close-button:active {
             transform: scale(0.95);
         }
-        
-        /* 响应式设计 */
+
         @media (max-width: 480px) {
             .container {
                 padding: 25px 20px;
             }
-            
             .title {
                 font-size: 22px;
             }
-            
             .option-button {
                 padding: 16px 20px;
                 font-size: 16px;
             }
-            
             .success-content {
                 padding: 30px 20px;
             }
-            
             .success-title {
                 font-size: 24px;
             }
-            
             .love-message-container {
                 font-size: 22px;
                 padding: 20px 15px;
@@ -264,201 +250,144 @@
     </style>
 </head>
 <body>
-    <!-- 主容器 -->
-    <div class="container" id="main-container">
-        <div class="title">
-            <span class="title-icon">🎭</span>
-            <span>愚人节特别挑战</span>
-            <span class="title-icon">🎭</span>
-        </div>
-        
-        <div class="subtitle">
-            亲爱的，你点开了这个链接！<br>
-            现在你必须完成挑战才能退出...
-        </div>
-        
-        <div class="options-container">
-            <button class="option-button option-wrong" id="wrong1">
-                <span class="option-icon">❌</span>
-                <span>点这里退出</span>
-            </button>
-            
-            <button class="option-button option-wrong" id="wrong2">
-                <span class="option-icon">❌</span>
-                <span>拒绝挑战</span>
-            </button>
-            
-            <button class="option-button option-wrong" id="wrong3">
-                <span class="option-icon">❌</span>
-                <span>我不是你宝贝</span>
-            </button>
-            
-            <button class="option-button option-correct" id="correct">
-                <span class="option-icon">💋</span>
-                <span>亲男朋友一口</span>
-            </button>
-        </div>
-        
-        <div class="error-message" id="error-message">
-            错误选择！请选择"亲男朋友一口"才能退出！
-        </div>
+
+<div class="container" id="main-container">
+    <div class="title">
+        <span class="title-icon">🎭</span>
+        <span>愚人节特别挑战</span>
+        <span class="title-icon">🎭</span>
     </div>
     
-    <!-- 成功界面 -->
-    <div class="success-container" id="success-container">
-        <div class="success-content">
-            <div class="success-title">
-                <span>🎉</span>
-                <span>挑战成功！</span>
-                <span>🎉</span>
-            </div>
-            
-            <div class="success-message">
-                你选择了"亲男朋友一口"！<br>
-                已经自动发送"我爱你"消息
-            </div>
-            
-            <div class="love-message-container" id="love-message">
-                我爱你 💕
-            </div>
-            
-            <button class="close-button" id="close-button">
-                退出页面
-            </button>
-        </div>
+    <div class="subtitle">
+        亲爱的，你点开了这个链接！<br>
+        现在你必须完成挑战才能退出...
     </div>
     
-    <script>
-        // 页面加载完成后执行
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log("页面加载完成，开始初始化...");
-            
-            // 添加事件监听
-            document.getElementById('wrong1').addEventListener('click', function() {
-                handleWrongOption(1);
-            });
-            
-            document.getElementById('wrong2').addEventListener('click', function() {
-                handleWrongOption(2);
-            });
-            
-            document.getElementById('wrong3').addEventListener('click', function() {
-                handleWrongOption(3);
-            });
-            
-            document.getElementById('correct').addEventListener('click', function() {
-                handleCorrectOption();
-            });
-            
-            // 彻底禁用关闭按钮功能
-            document.getElementById('close-button').addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                alert("愚人节快乐！页面无法关闭哦～");
-            });
-        });
+    <div class="options-container">
+        <button class="option-button option-wrong" id="wrong1">
+            <span class="option-icon">❌</span>
+            <span>点这里退出</span>
+        </button>
         
-        // 处理错误选项
-        function handleWrongOption(optionNum) {
-            const errorMessages = [
-                "想得美！不亲我是出不去的~",
-                "拒绝无效！今天必须亲我~",
-                "不承认也没用，你就是我宝贝！"
-            ];
-            
-            const errorMessage = errorMessages[optionNum - 1] || "错误选择！请选择正确的选项才能退出！";
-            showError(errorMessage);
-            
-            // 震动效果
-            const container = document.getElementById('main-container');
-            container.style.animation = 'none';
-            setTimeout(() => {
-                container.style.animation = 'popIn 0.6s ease-out';
-            }, 10);
-        }
+        <button class="option-button option-wrong" id="wrong2">
+            <span class="option-icon">❌</span>
+            <span>拒绝挑战</span>
+        </button>
         
-        // 处理正确选项
-        function handleCorrectOption() {
-            // 隐藏主容器
-            document.getElementById('main-container').style.display = 'none';
-            
-            // 显示成功界面
-            document.getElementById('success-container').style.display = 'flex';
-            
-            // 显示发送"我爱你"消息
-            showLoveMessage();
-        }
+        <button class="option-button option-wrong" id="wrong3">
+            <span class="option-icon">❌</span>
+            <span>我不是你宝贝</span>
+        </button>
         
-        // 显示错误消息
-        function showError(message) {
-            const errorElement = document.getElementById('error-message');
-            errorElement.textContent = message;
-            errorElement.style.display = 'block';
-            
-            // 2秒后隐藏错误消息
-            setTimeout(() => {
-                errorElement.style.display = 'none';
-            }, 2000);
-        }
-        
-        // 显示"我爱你"消息
-        function showLoveMessage() {
-            const loveMessage = document.getElementById('love-message');
-            
-            // 发送动画
-            let count = 0;
-            const sendAnimation = setInterval(() => {
-                const dots = '.'.repeat((count % 4));
-                loveMessage.textContent = `正在发送我爱你消息${dots}`;
-                count++;
-                
-                if (count === 8) {
-                    clearInterval(sendAnimation);
-                    loveMessage.innerHTML = "我爱你 💕<br><small>消息已发送成功！</small>";
-                }
-            }, 300);
-        }
-        
-        // ==================== 核心强制锁定代码 ====================
-        // 1. 彻底禁用所有退出/关闭/刷新行为
-        window.onbeforeunload = function(e) {
-            e.preventDefault();
-            return "愚人节快乐！页面无法关闭、刷新或返回～";
-        };
+        <button class="option-button option-correct" id="correct">
+            <span class="option-icon">💋</span>
+            <span>亲男朋友一口</span>
+        </button>
+    </div>
+    
+    <div class="error-message" id="error-message">
+        错误选择！请选择"亲男朋友一口"才能退出！
+    </div>
+</div>
 
-        // 2. 禁用返回键
-        history.pushState(null, null, location.href);
-        window.onpopstate = function () {
-            history.go(1);
-            alert("愚人节快乐！禁止返回上一页～");
-        };
-
-        // 3. 禁用所有系统菜单、刷新、选择
-        document.addEventListener('touchmove', function(e) {
-            e.preventDefault();
-        }, { passive: false });
+<div class="success-container" id="success-container">
+    <div class="success-content">
+        <div class="success-title">
+            <span>🎉</span>
+            <span>挑战成功！</span>
+            <span>🎉</span>
+        </div>
         
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-            alert("愚人节快乐！禁止右键操作～");
-        });
+        <div class="success-message">
+            你选择了"亲男朋友一口"！<br>
+            已经自动发送"我爱你"消息
+        </div>
         
-        document.addEventListener('selectstart', function(e) {
-            e.preventDefault();
-        });
+        <div class="love-message-container" id="love-message">
+            我爱你 💕
+        </div>
+        
+        <button class="close-button" id="close-button">
+            退出页面
+        </button>
+    </div>
+</div>
 
-        // 4. 禁用键盘刷新/关闭快捷键
-        document.addEventListener('keydown', function(e) {
-            if (
-                e.key === 'F5' || 
-                e.key === 'F11' || 
-                (e.ctrlKey && e.key === 'r') || 
-                (e.metaKey && e.key === 'r')
-            ) {
-                e.preventDefault();
-                alert("愚人节快乐！禁止刷新页面～");
-            }
-        });
-    </script>
+<script>
+let canClose = false;
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('wrong1').addEventListener('click', () => handleWrongOption(1));
+    document.getElementById('wrong2').addEventListener('click', () => handleWrongOption(2));
+    document.getElementById('wrong3').addEventListener('click', () => handleWrongOption(3));
+    document.getElementById('correct').addEventListener('click', handleCorrectOption);
+    document.getElementById('close-button').addEventListener('click', () => {
+        canClose = true;
+        alert("愚人节快乐！可以关闭页面啦～");
+        window.close();
+    });
+});
+
+function handleWrongOption(optionNum) {
+    const errorMessages = [
+        "想得美！不亲我是出不去的~",
+        "拒绝无效！今天必须亲我~",
+        "不承认也没用，你就是我宝贝！"
+    ];
+    showError(errorMessages[optionNum - 1]);
+    
+    const container = document.getElementById('main-container');
+    container.style.animation = 'none';
+    setTimeout(() => container.style.animation = 'popIn 0.6s ease-out', 10);
+}
+
+function handleCorrectOption() {
+    document.getElementById('main-container').style.display = 'none';
+    document.getElementById('success-container').style.display = 'flex';
+    showLoveMessage();
+    canClose = true;
+}
+
+function showError(message) {
+    const el = document.getElementById('error-message');
+    el.textContent = message;
+    el.style.display = 'block';
+    setTimeout(() => el.style.display = 'none', 2000);
+}
+
+function showLoveMessage() {
+    const el = document.getElementById('love-message');
+    let count = 0;
+    const anim = setInterval(() => {
+        el.textContent = `正在发送我爱你消息${'.'.repeat(count % 4)}`;
+        if (count++ === 8) {
+            clearInterval(anim);
+            el.innerHTML = "我爱你 💕<br><small>消息已发送成功！</small>";
+        }
+    }, 300);
+}
+
+// 强制禁止关闭/返回/刷新，只有选对了才放行
+window.onbeforeunload = (e) => {
+    if (!canClose) {
+        e.preventDefault();
+        return "必须完成挑战才能离开哦～";
+    }
+};
+
+history.pushState(null, null, location.href);
+window.onpopstate = () => {
+    if (!canClose) history.go(1);
+};
+
+document.addEventListener('keydown', e => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'r' || e.key === 'F5') {
+        if (!canClose) e.preventDefault();
+    }
+});
+
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('touchmove', e => e.preventDefault(), { passive: false });
+</script>
 </body>
 </html>
