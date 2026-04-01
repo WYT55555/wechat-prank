@@ -14,7 +14,6 @@
             -webkit-user-select: none;
             user-select: none;
         }
-        
         body {
             background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 30%, #ffb6c1 100%);
             min-height: 100vh;
@@ -27,7 +26,6 @@
             height: 100%;
             font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
         }
-        
         .container {
             background-color: rgba(255, 255, 255, 0.98);
             border-radius: 20px;
@@ -40,12 +38,10 @@
             overflow: hidden;
             animation: popIn 0.6s ease-out;
         }
-        
         @keyframes popIn {
             0% { transform: scale(0.8) translateY(20px); opacity: 0; }
             100% { transform: scale(1) translateY(0); opacity: 1; }
         }
-        
         .title {
             font-size: 24px;
             color: #ff4081;
@@ -55,31 +51,26 @@
             justify-content: center;
             gap: 10px;
         }
-        
         .title-icon {
             font-size: 28px;
             animation: bounce 2s infinite;
         }
-        
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-5px); }
         }
-        
         .subtitle {
             font-size: 16px;
             color: #666;
             margin-bottom: 25px;
             line-height: 1.5;
         }
-        
         .options-container {
             display: flex;
             flex-direction: column;
             gap: 12px;
             margin-bottom: 20px;
         }
-        
         .option-button {
             padding: 18px 20px;
             border-radius: 12px;
@@ -95,35 +86,28 @@
             position: relative;
             overflow: hidden;
         }
-        
         .option-button:active {
             transform: scale(0.97);
         }
-        
         .option-wrong {
             background-color: #f8f9fa;
             color: #666;
             border: 2px solid #e9ecef;
         }
-        
         .option-wrong:hover {
             background-color: #e9ecef;
         }
-        
         .option-correct {
             background: linear-gradient(135deg, #ff4081, #ff6b9d);
             color: white;
             border: 2px solid #ff4081;
         }
-        
         .option-correct:hover {
             background: linear-gradient(135deg, #f50057, #ff4081);
         }
-        
         .option-icon {
             font-size: 20px;
         }
-        
         .error-message {
             background-color: rgba(244, 67, 54, 0.9);
             color: white;
@@ -134,13 +118,11 @@
             display: none;
             animation: shake 0.5s ease;
         }
-        
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
             25% { transform: translateX(-5px); }
             75% { transform: translateX(5px); }
         }
-        
         .success-container {
             position: fixed;
             top: 0;
@@ -155,7 +137,6 @@
             z-index: 2000;
             padding: 20px;
         }
-        
         .success-content {
             background-color: rgba(255, 255, 255, 0.98);
             border-radius: 20px;
@@ -165,12 +146,10 @@
             max-width: 400px;
             animation: successPop 0.8s ease-out;
         }
-        
         @keyframes successPop {
             0% { transform: scale(0.5) rotate(-5deg); opacity: 0; }
             100% { transform: scale(1) rotate(0deg); opacity: 1; }
         }
-        
         .success-title {
             font-size: 28px;
             color: #ff4081;
@@ -180,14 +159,12 @@
             justify-content: center;
             gap: 15px;
         }
-        
         .success-message {
             font-size: 16px;
             color: #666;
             margin-bottom: 25px;
             line-height: 1.6;
         }
-        
         .love-message-container {
             background: linear-gradient(135deg, #ff4081, #ff6b9d);
             color: white;
@@ -200,13 +177,11 @@
             position: relative;
             overflow: hidden;
         }
-        
         @keyframes pulse {
             0% { transform: scale(1); box-shadow: 0 5px 20px rgba(255, 64, 129, 0.3); }
             50% { transform: scale(1.03); box-shadow: 0 8px 25px rgba(255, 64, 129, 0.5); }
             100% { transform: scale(1); box-shadow: 0 5px 20px rgba(255, 64, 129, 0.3); }
         }
-        
         .close-button {
             background: linear-gradient(135deg, #4CAF50, #66BB6A);
             color: white;
@@ -220,32 +195,16 @@
             width: 100%;
             max-width: 200px;
         }
-        
         .close-button:active {
             transform: scale(0.95);
         }
-
         @media (max-width: 480px) {
-            .container {
-                padding: 25px 20px;
-            }
-            .title {
-                font-size: 22px;
-            }
-            .option-button {
-                padding: 16px 20px;
-                font-size: 16px;
-            }
-            .success-content {
-                padding: 30px 20px;
-            }
-            .success-title {
-                font-size: 24px;
-            }
-            .love-message-container {
-                font-size: 22px;
-                padding: 20px 15px;
-            }
+            .container { padding: 25px 20px; }
+            .title { font-size: 22px; }
+            .option-button { padding: 16px 20px; font-size: 16px; }
+            .success-content { padding: 30px 20px; }
+            .success-title { font-size: 24px; }
+            .love-message-container { font-size: 22px; padding: 20px 15px; }
         }
     </style>
 </head>
@@ -257,34 +216,28 @@
         <span>愚人节特别挑战</span>
         <span class="title-icon">🎭</span>
     </div>
-    
     <div class="subtitle">
         亲爱的，你点开了这个链接！<br>
         现在你必须完成挑战才能退出...
     </div>
-    
     <div class="options-container">
         <button class="option-button option-wrong" id="wrong1">
             <span class="option-icon">❌</span>
             <span>点这里退出</span>
         </button>
-        
         <button class="option-button option-wrong" id="wrong2">
             <span class="option-icon">❌</span>
             <span>拒绝挑战</span>
         </button>
-        
         <button class="option-button option-wrong" id="wrong3">
             <span class="option-icon">❌</span>
             <span>我不是你宝贝</span>
         </button>
-        
         <button class="option-button option-correct" id="correct">
             <span class="option-icon">💋</span>
             <span>亲男朋友一口</span>
         </button>
     </div>
-    
     <div class="error-message" id="error-message">
         错误选择！请选择"亲男朋友一口"才能退出！
     </div>
@@ -297,16 +250,13 @@
             <span>挑战成功！</span>
             <span>🎉</span>
         </div>
-        
         <div class="success-message">
             你选择了"亲男朋友一口"！<br>
             已经自动发送"我爱你"消息
         </div>
-        
         <div class="love-message-container" id="love-message">
             我爱你 💕
         </div>
-        
         <button class="close-button" id="close-button">
             退出页面
         </button>
@@ -316,78 +266,96 @@
 <script>
 let canClose = false;
 
+// 页面加载后立即初始化微信拦截
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('wrong1').addEventListener('click', () => handleWrongOption(1));
-    document.getElementById('wrong2').addEventListener('click', () => handleWrongOption(2));
-    document.getElementById('wrong3').addEventListener('click', () => handleWrongOption(3));
-    document.getElementById('correct').addEventListener('click', handleCorrectOption);
-    document.getElementById('close-button').addEventListener('click', () => {
-        canClose = true;
-        alert("愚人节快乐！可以关闭页面啦～");
-        window.close();
-    });
+    // 绑定按钮事件
+    document.getElementById('wrong1').onclick = () => handleWrong(1);
+    document.getElementById('wrong2').onclick = () => handleWrong(2);
+    document.getElementById('wrong3').onclick = () => handleWrong(3);
+    document.getElementById('correct').onclick = handleCorrect;
+    document.getElementById('close-button').onclick = closePage;
+
+    // 初始化：微信环境拦截返回
+    initWechatBackBlock();
 });
 
-function handleWrongOption(optionNum) {
-    const errorMessages = [
+// 核心：拦截微信返回（左上角+手机返回键）
+function initWechatBackBlock() {
+    // 先压入历史，让返回停在本页
+    history.pushState(null, null, location.href);
+    // 监听返回事件
+    window.addEventListener('popstate', function() {
+        if (!canClose) {
+            // 未完成挑战：强制留在当前页
+            history.pushState(null, null, location.href);
+            showError("必须完成挑战才能退出哦～");
+        }
+    });
+
+    // 额外加固：禁止刷新、右键、选择
+    document.addEventListener('keydown', e => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'r' || e.key === 'F5') {
+            if (!canClose) e.preventDefault();
+        }
+    });
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('touchmove', e => e.preventDefault(), { passive: false });
+}
+
+// 错误选项
+function handleWrong(num) {
+    const msgs = [
         "想得美！不亲我是出不去的~",
         "拒绝无效！今天必须亲我~",
         "不承认也没用，你就是我宝贝！"
     ];
-    showError(errorMessages[optionNum - 1]);
-    
-    const container = document.getElementById('main-container');
-    container.style.animation = 'none';
-    setTimeout(() => container.style.animation = 'popIn 0.6s ease-out', 10);
+    showError(msgs[num-1]);
+    const c = document.getElementById('main-container');
+    c.style.animation = 'none';
+    setTimeout(() => c.style.animation = 'popIn 0.6s ease-out', 10);
 }
 
-function handleCorrectOption() {
+// 正确选项：允许退出
+function handleCorrect() {
+    canClose = true;
     document.getElementById('main-container').style.display = 'none';
     document.getElementById('success-container').style.display = 'flex';
-    showLoveMessage();
-    canClose = true;
+    showLoveAnim();
 }
 
-function showError(message) {
+// 显示错误
+function showError(msg) {
     const el = document.getElementById('error-message');
-    el.textContent = message;
+    el.textContent = msg;
     el.style.display = 'block';
-    setTimeout(() => el.style.display = 'none', 2000);
+    setTimeout(() => el.style.display = 'none', 2200);
 }
 
-function showLoveMessage() {
+// 我爱你动画
+function showLoveAnim() {
     const el = document.getElementById('love-message');
-    let count = 0;
-    const anim = setInterval(() => {
-        el.textContent = `正在发送我爱你消息${'.'.repeat(count % 4)}`;
-        if (count++ === 8) {
-            clearInterval(anim);
+    let i = 0;
+    const t = setInterval(() => {
+        el.textContent = `正在发送我爱你${'.'.repeat(i%4)}`;
+        if (i++ === 8) {
+            clearInterval(t);
             el.innerHTML = "我爱你 💕<br><small>消息已发送成功！</small>";
         }
     }, 300);
 }
 
-// 强制禁止关闭/返回/刷新，只有选对了才放行
-window.onbeforeunload = (e) => {
-    if (!canClose) {
-        e.preventDefault();
-        return "必须完成挑战才能离开哦～";
+// 关闭页面（支持微信）
+function closePage() {
+    if (confirm("愚人节快乐！确定关闭页面？")) {
+        // 微信专用关闭
+        if (typeof WeixinJSBridge === 'object') {
+            WeixinJSBridge.invoke('closeWindow', {}, () => {});
+        } else {
+            // 兼容普通浏览器
+            window.close();
+        }
     }
-};
-
-history.pushState(null, null, location.href);
-window.onpopstate = () => {
-    if (!canClose) history.go(1);
-};
-
-document.addEventListener('keydown', e => {
-    if ((e.ctrlKey || e.metaKey) && e.key === 'r' || e.key === 'F5') {
-        if (!canClose) e.preventDefault();
-    }
-});
-
-document.addEventListener('contextmenu', e => e.preventDefault());
-document.addEventListener('touchmove', e => e.preventDefault(), { passive: false });
+}
 </script>
 </body>
 </html>
