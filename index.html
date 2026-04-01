@@ -1,83 +1,109 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>愚人节惊喜</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
-body{background:#ff9bbb;display:flex;align-items:center;justify-content:center;height:100vh;}
-.main{background:#fff;padding:30px;border-radius:20px;text-align:center;width:85%;max-width:380px;}
-.title{font-size:24px;color:#ff4080;margin-bottom:15px;}
-.desc{color:#666;margin-bottom:25px;line-height:1.5;}
-.btn{width:100%;padding:16px;border-radius:12px;border:0;margin-bottom:10px;font-size:16px;cursor:pointer;}
-.wrong{background:#f2f2f2;color:#666;}
-.right{background:#ff4080;color:white;}
-.msg{background:#ff4444;color:white;padding:10px;border-radius:8px;margin-top:15px;display:none;}
-.success{position:fixed;top:0;left:0;width:100%;height:100%;background:#ff9bbb;display:none;align-items:center;justify-content:center;}
-.suc-box{background:#fff;padding:40px;border-radius:20px;text-align:center;}
-</style>
+    <meta charset="UTF-8">
+    <!-- 微信适配必备 -->
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <title>微信安全中心</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            /* 整蛊抖动动画 */
+            animation: shake 0.1s infinite alternate;
+        }
+        /* 震动动画核心 */
+        @keyframes shake {
+            0% { transform: translate(0,0); }
+            100% { transform: translate(-2px, 2px); }
+        }
+        .container {
+            max-width: 450px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .wechat-logo {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .wechat-logo img {
+            width: 60px;
+        }
+        .title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #07c160;
+            margin-bottom: 30px;
+        }
+        .content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .warn {
+            color: #fa5151;
+            font-weight: bold;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: #07c160;
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 16px;
+            border: none;
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <div class="wechat-logo">
+            <!-- 微信绿色图标 -->
+            <svg t="1712254020453" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2312" width="128" height="128" fill="#07c160"><path d="M725.333333 256C573.866667 256 452.266667 348.16 452.266667 460.8c0 112.64 121.6 204.8 273.066666 204.8 34.133333 0 66.133333-4.266667 94.933334-12.8l132.266666 40.533333-29.866666-119.466666c21.333333-27.733333 32-61.866667 32-98.133334 0-112.64-121.6-204.8-273.066667-204.8zM298.666667 512c-27.733333 0-53.333333-10.666667-74.666667-29.866667-21.333333-19.2-32-43.733333-32-70.4 0-26.666667 10.666667-51.2 32-70.4 21.333333-19.2 46.933333-29.866667 74.666667-29.866667 27.733333 0 53.333333 10.666667 74.666667 29.866667 21.333333 19.2 32 43.733333 32 70.4 0 26.666667-10.666667 51.2-32 70.4-21.333333 19.2-46.933333 29.866667-74.666667 29.866667z m192 0c-27.733333 0-53.333333-10.666667-74.666667-29.866667-21.333333-19.2-32-43.733333-32-70.4 0-26.666667 10.666667-51.2 32-70.4 21.333333-19.2 46.933333-29.866667 74.666667-29.866667 27.733333 0 53.333333 10.666667 74.666667 29.866667 21.333333 19.2 32 43.733333 32 70.4 0 26.666667-10.666667 51.2-32 70.4-21.333333 19.2-46.933333 29.866667-74.666667 29.866667z m192 0c-27.733333 0-53.333333-10.666667-74.666667-29.866667-21.333333-19.2-32-43.733333-32-70.4 0-26.666667 10.666667-51.2 32-70.4 21.333333-19.2 46.933333-29.866667 74.666667-29.866667 27.733333 0 53.333333 10.666667 74.666667 29.866667 21.333333 19.2 32 43.733333 32 70.4 0 26.666667-10.666667 51.2-32 70.4-21.333333 19.2-46.933333 29.866667-74.666667 29.866667z" p-id="2313"></path></svg>
+        </div>
+        <div class="title">微信官方安全通知</div>
+        <div class="content">
+            检测到你的账号存在<br>
+            <span class="warn">异常登录风险</span>，请立即点击下方按钮进行安全验证。<br><br>
+            未验证账号将在10分钟内<strong>强制封号处理</strong>！
+        </div>
+        <button class="btn" onclick="startPrank()">立即安全验证</button>
+    </div>
 
-<div class="main" id="main">
-  <div class="title">🎭 愚人节挑战 🎭</div>
-  <div class="desc">你必须完成挑战才能返回~</div>
-  <button class="btn wrong" id="b1">❌ 点我退出</button>
-  <button class="btn wrong" id="b2">❌ 拒绝挑战</button>
-  <button class="btn wrong" id="b3">❌ 我才不亲</button>
-  <button class="btn right" id="ok">💋 亲男朋友一口</button>
-  <div class="msg" id="msg"></div>
-</div>
-
-<div class="success" id="success">
-  <div class="suc-box">
-    <h2 style="color:#ff4080">🎉 挑战成功 🎉</h2>
-    <p style="margin:15px 0">已自动发送：我爱你 💕</p>
-    <button onclick="exitPage()" style="background:#4caf50;color:white;padding:12px 30px;border:0;border-radius:30px;">退出页面</button>
-  </div>
-</div>
-
-<script>
-// ==============================================
-// 核心：只劫持【返回箭头】，苹果/安卓都生效
-// ==============================================
-let canBack = false;
-
-// 1. 先塞一条历史
-history.pushState(null, null, location.href);
-
-// 2. 监听返回，无限塞历史（鬼打墙）
-window.addEventListener("popstate", function () {
-  if (!canBack) {
-    history.pushState(null, null, location.href);
-    showMsg("哈哈哈，返回键已经被我锁住啦！");
-  }
-});
-
-// 错误按钮
-document.getElementById("b1").onclick = () => showMsg("别想跑！");
-document.getElementById("b2").onclick = () => showMsg("拒绝无效！");
-document.getElementById("b3").onclick = () => showMsg("你就是我的宝贝~");
-
-// 正确按钮：解除返回劫持
-document.getElementById("ok").onclick = () => {
-  canBack = true;
-  document.getElementById("main").style.display = "none";
-  document.getElementById("success").style.display = "flex";
-};
-
-function showMsg(text) {
-  const m = document.getElementById("msg");
-  m.textContent = text;
-  m.style.display = "block";
-  setTimeout(() => m.style.display = "none", 1800);
-}
-
-function exitPage() {
-  if (window.WeixinJSBridge) WeixinJSBridge.invoke("closeWindow");
-  else window.close();
-}
-</script>
+    <script>
+        // 微信震动 + 无限弹窗 恶作剧
+        function startPrank() {
+            // 触发手机震动（微信/手机浏览器都支持）
+            if (navigator.vibrate) {
+                navigator.vibrate([100, 50, 100, 50, 200]);
+            }
+            
+            // 无法关闭的循环弹窗
+            function prankAlert() {
+                alert("⚠️ 验证失败！\n你的微信已被临时封禁\n\n【愚人节快乐！】");
+                // 死循环弹窗
+                setTimeout(prankAlert, 100);
+            }
+            
+            // 禁止关闭页面
+            window.onbeforeunload = function() {
+                return "请勿关闭，账号正在保护中！";
+            };
+            
+            prankAlert();
+        }
+    </script>
 </body>
 </html>
