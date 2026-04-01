@@ -6,27 +6,96 @@
 <title>愚人节愿望</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:sans-serif}
-body{background:#fce4ec;padding:30px 20px;text-align:center}
-.title{font-size:26px;color:#d81b60;margin-bottom:30px}
-.wrap{max-width:500px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
-.item{background:#fff;padding:16px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.1);font-size:17px;cursor:pointer;transition:all 0.3s}
-.special{background:#ff5a95;color:#fff;font-weight:bold;border:2px solid #ffd600}
-.tip{margin-top:20px;color:#666;font-size:14px}
-.mask{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.4);display:none}
-.pop{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;padding:30px;border-radius:16px;display:none;min-width:280px}
-.pop h3{color:#d81b60;margin-bottom:15px}
+body{
+  background:#fce4ec;
+  min-height:100vh;
+  padding:30px 20px;
+  text-align:center;
+  overflow-x: hidden;
+}
+.title{
+  font-size:26px;
+  color:#d81b60;
+  margin-bottom:30px;
+  position: relative;
+  z-index: 10;
+}
+.wrap{
+  max-width:500px;
+  margin:0 auto;
+  position: relative;
+  height: 550px;
+}
+
+/* 气泡圆球样式 + 浮动动画 */
+.item{
+  position: absolute;
+  background:#fff;
+  padding: 22px 18px;
+  border-radius:50%;
+  box-shadow:0 4px 12px rgba(0,0,0,0.15);
+  font-size:16px;
+  cursor:pointer;
+  transition:all 0.5s ease;
+  white-space: nowrap;
+  animation: float 3s ease-in-out infinite alternate;
+  z-index: 2;
+}
+@keyframes float {
+  from { transform: translateY(0px); }
+  to   { transform: translateY(-12px); }
+}
+
+.special{
+  background:#ff5a95;
+  color:#fff;
+  font-weight:bold;
+  border:2px solid #ffd600;
+  z-index: 1;
+}
+
+.tip{
+  margin-top:20px;
+  color:#666;
+  font-size:14px;
+  position: relative;
+  z-index: 10;
+}
+.mask{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:rgba(0,0,0,0.4);
+  display:none;
+  z-index: 999;
+}
+.pop{
+  position:fixed;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  background:#fff;
+  padding:30px;
+  border-radius:16px;
+  display:none;
+  min-width:280px;
+  z-index: 1000;
+}
+.pop h3{
+  color:#d81b60;
+  margin-bottom:15px;
+}
 </style>
 </head>
 <body>
 
 <div class="title">愚人节·愿望成真</div>
 <div class="wrap">
-  <div class="item normal">暴富一百万</div>
-  <div class="item normal">吃不胖还变瘦</div>
-  <div class="item normal">每天睡到自然醒</div>
-  <div class="item normal">永远开心不生气</div>
-  <div class="item normal">想要最新的手机</div>
-  <div class="item special">亲男朋友一下</div>
+  <div class="item normal" style="top:10px; left:20px">暴富一百万</div>
+  <div class="item normal" style="top:80px; left:180px">吃不胖还变瘦</div>
+  <div class="item normal" style="top:20px; left:300px">每天睡到自然醒</div>
+  <div class="item normal" style="top:180px; left:40px">永远开心不生气</div>
+  <div class="item normal" style="top:220px; left:220px">想要最新的手机</div>
+  <div class="item special" style="top:120px; left:100px">亲男朋友一下</div>
 </div>
 <div class="tip">点击任意愿望，试试能不能实现～</div>
 
@@ -38,17 +107,25 @@ body{background:#fce4ec;padding:30px 20px;text-align:center}
 </div>
 
 <script>
-let s = 1;
+let scaleNormal = 1;
+let scaleSpecial = 1;
+
 document.querySelectorAll('.normal').forEach(i=>{
   i.onclick=()=>{
     alert("你选择了："+i.innerText+"\n好像有点难实现哦…");
-    s = Math.max(0.2, s - 0.12);
+
+    // 普通愿望缩小
+    scaleNormal = Math.max(0.1, scaleNormal - 0.15);
     document.querySelectorAll('.normal').forEach(n=>{
-      n.style.transform=`scale(${s})`;
-      n.style.opacity=s;
+      n.style.transform = `scale(${scaleNormal})`;
+      n.style.opacity = scaleNormal + 0.2;
     });
-    let sp=document.querySelector('.special');
-    sp.style.transform=`scale(${1+(1-s)*0.7})`;
+
+    // 特殊愿望变大，最终撑满屏幕
+    scaleSpecial += 0.8;
+    let sp = document.querySelector('.special');
+    sp.style.transform = `scale(${scaleSpecial})`;
+    sp.style.zIndex = 5;
   }
 })
 
@@ -56,6 +133,7 @@ document.querySelector('.special').onclick=()=>{
   alert("你选择了：亲男朋友一下\n恭喜！这个愿望可以实现～");
   document.getElementById('mask').style.display='block';
   document.getElementById('pop').style.display='block';
+
   let t=document.createElement('textarea');
   t.value='我爱你';
   document.body.appendChild(t);
